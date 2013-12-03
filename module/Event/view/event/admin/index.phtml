@@ -1,3 +1,8 @@
+<?php
+use Event\Entity\EventEntity;
+
+/* @var $event EventEntity */
+?>
 <h1>Eventliste</h1>
 
 <table class="table table-bordered">
@@ -15,21 +20,22 @@
     <tbody>
     <?php foreach ($this->eventList as $event): ?>
         <tr>
-            <td><?php echo $event['id']; ?></td>
-            <td><?php echo $event['name']; ?></td>
-            <td><?php echo $event['description']; ?></td>
+            <td><?php echo $event->getId(); ?></td>
+            <td><?php echo $event->getName(); ?></td>
+            <td><?php echo $event->getDescription(); ?></td>
             <td><?php echo $this->dateFormat(
-                    $event['date'], IntlDateFormatter::LONG,
+                    $event->getDate(), IntlDateFormatter::LONG,
                     IntlDateFormatter::NONE
                 ); ?></td>
             <td><?php echo $this->dateFormat(
-                    $event['time'], IntlDateFormatter::NONE,
+                    $event->getTime(), IntlDateFormatter::NONE,
                     IntlDateFormatter::SHORT
                 ); ?></td>
-            <td><?php echo $this->eventStatus($event['status']); ?></td>
+            <td><?php echo $this->eventStatus($event->getStatus()); ?></td>
             <td>
                 <a href="<?php echo $this->url(
-                    'event-admin/action', array('action' => 'show', 'id' => $event['id'])
+                    'event-admin/action',
+                    array('action' => 'show', 'id' => $event->getId())
                 ) ?>" class="btn btn-default">
                     anzeigen
                 </a>

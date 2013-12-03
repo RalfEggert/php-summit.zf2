@@ -1,37 +1,43 @@
-<?php $event = $this->event; ?>
+<?php
+use Event\Entity\EventEntity;
+
+/* @var $event EventEntity */
+
+$event = $this->event;
+?>
 
 <h1>Event anzeigen</h1>
 <table class="table table-bordered">
     <tbody>
     <tr>
         <th>ID</th>
-        <td><?php echo $event['id']; ?></td>
+        <td><?php echo $event->getId(); ?></td>
     </tr>
     <tr>
         <th>Name</th>
-        <td><?php echo $event['name']; ?></td>
+        <td><?php echo $event->getName(); ?></td>
     </tr>
     <tr>
         <th>Beschreibug</th>
-        <td><?php echo $event['description']; ?></td>
+        <td><?php echo $event->getDescription(); ?></td>
     </tr>
     <tr>
         <th>Datum</th>
         <td><?php echo $this->dateFormat(
-                $event['date'], IntlDateFormatter::LONG,
+                $event->getDate(), IntlDateFormatter::LONG,
                 IntlDateFormatter::NONE
             ); ?></td>
     </tr>
     <tr>
         <th>Uhr</th>
         <td><?php echo $this->dateFormat(
-                $event['time'], IntlDateFormatter::NONE,
+                $event->getTime(), IntlDateFormatter::NONE,
                 IntlDateFormatter::SHORT
             ); ?></td>
     </tr>
     <tr>
         <th>Status</th>
-        <td><?php echo $this->eventStatus($event['status']); ?></td>
+        <td><?php echo $this->eventStatus($event->getStatus()); ?></td>
     </tr>
     </tbody>
 </table>

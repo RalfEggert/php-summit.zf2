@@ -2,41 +2,38 @@
 
 namespace Event\Controller;
 
+use Event\Service\EventService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 class AdminController extends AbstractActionController
 {
-    protected $eventList = array();
+    /**
+     * @var EventService
+     */
+    protected $eventService;
 
-    function __construct()
+    /**
+     * @return \Event\Service\EventService
+     */
+    public function getEventService()
     {
-        $this->eventList = array(
-            123 => array(
-                'id' => '123',
-                'name' => 'Fettes Brot Konzert',
-                'description' => 'Konzert mit den Broten',
-                'date' => new \DateTime('2013-12-06'),
-                'time' => new \DateTime('20:00'),
-                'status' => 1,
-            ),
-            456 => array(
-                'id' => '456',
-                'name' => 'Malen nach Zahlen',
-                'description' => 'Für die ganze Familie',
-                'date' => new \DateTime('2013-12-12'),
-                'time' => new \DateTime('15:00'),
-                'status' => 2,
-            ),
-        );
+        return $this->eventService;
     }
 
+    /**
+     * @param \Event\Service\EventService $eventService
+     */
+    public function setEventService($eventService)
+    {
+        $this->eventService = $eventService;
+    }
 
     public function indexAction()
     {
         return new ViewModel(
             array(
-                'eventList' => $this->eventList,
+                'eventList' => $this->getEventService()->fetchEventList(),
             )
         );
     }
@@ -45,7 +42,9 @@ class AdminController extends AbstractActionController
     {
         $id = $this->params()->fromRoute('id');
 
-        if (!isset($this->eventList[$id])) {
+        $event = $this->getEventService()->fetchEventEntity($id);
+
+        if (!$event) {
             $this->flashMessenger()->addErrorMessage('Unbekanntes Event');
 
             return $this->redirect()->toRoute('event-admin');
@@ -53,23 +52,9 @@ class AdminController extends AbstractActionController
 
         return new ViewModel(
             array(
-                'event' => $this->eventList[$id],
+                'event' => $event,
             )
         );
-    }
-
-    public function createAction()
-    {
-        $eventService = $this->getServiceLocator()->get('Event\Service\Event');
-
-        foreach ($this->eventList as $eventData) {
-            $eventData['date'] = $eventData['date']->format('Y-m-d');
-            $eventData['time'] = $eventData['time']->format('H:i');
-
-            $eventService->save($eventData);
-        }
-
-        return $this->redirect()->toRoute('event-admin');
     }
 }
 

@@ -51,7 +51,7 @@ class EventFilter extends InputFilter
                         ),
                     ),
                 ),
-            ),
+            )
         );
         $this->add(
             array(
@@ -61,7 +61,7 @@ class EventFilter extends InputFilter
                     array('name' => 'StringTrim'),
                     array('name' => 'StripTags'),
                 ),
-            ),
+            )
         );
         $this->add(
             array(
@@ -76,7 +76,7 @@ class EventFilter extends InputFilter
                         ),
                     ),
                 ),
-            ),
+            )
         );
         $this->add(
             array(
@@ -91,7 +91,7 @@ class EventFilter extends InputFilter
                         ),
                     ),
                 ),
-            ),
+            )
         );
         $this->add(
             array(
@@ -106,7 +106,7 @@ class EventFilter extends InputFilter
                         ),
                     ),
                 ),
-            ),
+            )
         );
     }
 

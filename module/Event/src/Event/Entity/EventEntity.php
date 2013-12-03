@@ -24,15 +24,15 @@ class EventEntity
     protected $status;
 
     /**
-     * @param mixed $date
+     * @param \DateTime $date
      */
-    public function setDate($date)
+    public function setDate(\DateTime $date)
     {
         $this->date = $date;
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -104,15 +104,15 @@ class EventEntity
     }
 
     /**
-     * @param mixed $time
+     * @param \DateTime $time
      */
-    public function setTime($time)
+    public function setTime(\DateTime $time)
     {
         $this->time = $time;
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getTime()
     {

@@ -37,7 +37,7 @@ class EventServiceFactory implements FactoryInterface
         $service->setEntity($entity);
         $service->setHydrator($hydrator);
         $service->setFilter($filter);
-        
+
         return $service;
     }
 

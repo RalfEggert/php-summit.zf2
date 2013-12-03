@@ -28,8 +28,8 @@ return array(
         ),
     ),
     'controllers'     => array(
-        'invokables' => array(
-            'event-admin' => 'Event\Controller\AdminController',
+        'factories' => array(
+            'event-admin' => 'Event\Controller\AdminControllerFactory',
         ),
     ),
     'view_manager'    => array(

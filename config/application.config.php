@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework 2 - MySkeletonApplication
+ * Zend Framework 2 - ZF2 PHP Summit
  *
  * Gepimpte SkeletonApplication für das Zend Framework 2,
  *

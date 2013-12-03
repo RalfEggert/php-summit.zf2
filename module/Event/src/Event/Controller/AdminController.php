@@ -65,7 +65,7 @@ class AdminController extends AbstractActionController
         foreach ($this->eventList as $eventData) {
             $eventData['date'] = $eventData['date']->format('Y-m-d');
             $eventData['time'] = $eventData['time']->format('H:i');
-            
+
             $eventService->save($eventData);
         }
 

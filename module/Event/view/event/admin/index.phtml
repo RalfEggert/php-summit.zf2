@@ -26,7 +26,7 @@
                     $event['time'], IntlDateFormatter::NONE,
                     IntlDateFormatter::SHORT
                 ); ?></td>
-            <td><?php echo $event['status']; ?></td>
+            <td><?php echo $this->eventStatus($event['status']); ?></td>
             <td>
                 <a href="<?php echo $this->url(
                     'event-admin/action', array('action' => 'show', 'id' => $event['id'])

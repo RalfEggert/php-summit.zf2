@@ -44,6 +44,7 @@ return array(
         'factories'  => array(
             'Event\Table\Event'   => 'Event\Table\EventTableFactory',
             'Event\Service\Event' => 'Event\Service\EventServiceFactory',
+            'Event\Config'        => 'Event\Config\EventConfigFactory',
         ),
         'shared'     => array(
             'Event\Entity\Event' => false,
@@ -52,6 +53,16 @@ return array(
     'hydrators'       => array(
         'invokables' => array(
             'Event\Hydrator' => 'Event\Hydrator\EventHydrator',
+        ),
+    ),
+    'view_helpers'       => array(
+        'factories' => array(
+            'EventStatus' => 'Event\View\Helper\EventStatusFactory',
+        ),
+    ),
+    'input_filters'       => array(
+        'factories' => array(
+            'Event\Filter' => 'Event\InputFilter\EventFilterFactory',
         ),
     ),
     'navigation'      => array(

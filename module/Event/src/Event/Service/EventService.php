@@ -11,6 +11,7 @@ namespace Event\Service;
 
 use Event\Entity\EventEntity;
 use Event\Hydrator\EventHydrator;
+use Event\InputFilter\EventFilter;
 use Event\Table\EventTable;
 use Zend\Db\Adapter\Exception\InvalidQueryException;
 
@@ -26,9 +27,17 @@ class EventService
      */
     protected $entity;
     /**
+     * @var EventFilter
+     */
+    protected $filter;
+    /**
      * @var EventHydrator
      */
     protected $hydrator;
+    /**
+     * @var string
+     */
+    protected $message;
     /**
      * @var EventTable
      */
@@ -44,6 +53,7 @@ class EventService
         try {
             $this->getTable()->delete(array('id' => $id));
         } catch (InvalidQueryException $e) {
+            $this->setMessage('Event konnte nicht gelöscht werden!');
             return false;
         }
 
@@ -91,6 +101,22 @@ class EventService
     }
 
     /**
+     * @return \Event\InputFilter\EventFilter
+     */
+    public function getFilter()
+    {
+        return $this->filter;
+    }
+
+    /**
+     * @param \Event\InputFilter\EventFilter $filter
+     */
+    public function setFilter($filter)
+    {
+        $this->filter = $filter;
+    }
+
+    /**
      * @return \Event\Hydrator\EventHydrator
      */
     public function getHydrator()
@@ -104,6 +130,22 @@ class EventService
     public function setHydrator($hydrator)
     {
         $this->hydrator = $hydrator;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param string $message
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
     }
 
     /**
@@ -135,6 +177,14 @@ class EventService
         $entity = $mode == 'insert' ? clone $this->getEntity()
             : $this->fetchEventEntity($id);
 
+        $this->getFilter()->setData($data);
+
+        if ($this->getFilter()->isValid()) {
+            $this->setMessage('Eingaben prüfen!');
+
+            return false;
+        }
+
         $this->getHydrator()->hydrate($data, $entity);
 
         $saveData = $this->getHydrator()->extract($entity);
@@ -147,6 +197,8 @@ class EventService
                 $this->getTable()->update($saveData, array('id' => $id));
             }
         } catch (InvalidQueryException $e) {
+            $this->setMessage('Event konnte nicht gespeichert werden!');
+
             return false;
         }
 

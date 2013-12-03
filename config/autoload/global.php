@@ -15,4 +15,13 @@
  * @package    Application
  */
 return array(
+    'service_manager' => array(
+        'factories' => array(
+            'Zend\Db\Adapter\Sqlite' => 'Zend\Db\Adapter\AdapterServiceFactory',
+        ),
+    ),
+    'db' => array(
+        'driver' => 'Pdo_Sqlite',
+        'database' => __DIR__ . '/../../data/db/events.db'
+    ),
 );

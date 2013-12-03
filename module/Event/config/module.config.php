@@ -1,6 +1,6 @@
 <?php
 return array(
-    'router'       => array(
+    'router'          => array(
         'routes' => array(
             'event-admin' => array(
                 'type'          => 'literal',
@@ -27,17 +27,34 @@ return array(
             ),
         ),
     ),
-    'controllers'  => array(
+    'controllers'     => array(
         'invokables' => array(
             'event-admin' => 'Event\Controller\AdminController',
         ),
     ),
-    'view_manager' => array(
+    'view_manager'    => array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
     ),
-    'navigation'   => array(
+    'service_manager' => array(
+        'invokables' => array(
+            'Event\Entity\Event' => 'Event\Entity\EventEntity',
+        ),
+        'factories'  => array(
+            'Event\Table\Event'   => 'Event\Table\EventTableFactory',
+            'Event\Service\Event' => 'Event\Service\EventServiceFactory',
+        ),
+        'shared'     => array(
+            'Event\Entity\Event' => false,
+        ),
+    ),
+    'hydrators'       => array(
+        'invokables' => array(
+            'Event\Hydrator' => 'Event\Hydrator\EventHydrator',
+        ),
+    ),
+    'navigation'      => array(
         'default' => array(
             array(
                 'label' => 'Events',

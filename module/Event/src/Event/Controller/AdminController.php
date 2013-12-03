@@ -58,6 +58,18 @@ class AdminController extends AbstractActionController
         );
     }
 
+    public function createAction()
+    {
+        $eventService = $this->getServiceLocator()->get('Event\Service\Event');
 
+        foreach ($this->eventList as $eventData) {
+            $eventData['date'] = $eventData['date']->format('Y-m-d');
+            $eventData['time'] = $eventData['time']->format('H:i');
+            
+            $eventService->save($eventData);
+        }
+
+        return $this->redirect()->toRoute('event-admin');
+    }
 }
 

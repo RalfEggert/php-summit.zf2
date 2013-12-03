@@ -1,0 +1,44 @@
+<?php $event = $this->event; ?>
+
+<h1>Event anzeigen</h1>
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        <th>ID</th>
+        <td><?php echo $event['id']; ?></td>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td><?php echo $event['name']; ?></td>
+    </tr>
+    <tr>
+        <th>Beschreibug</th>
+        <td><?php echo $event['description']; ?></td>
+    </tr>
+    <tr>
+        <th>Datum</th>
+        <td><?php echo $this->dateFormat(
+                $event['date'], IntlDateFormatter::LONG,
+                IntlDateFormatter::NONE
+            ); ?></td>
+    </tr>
+    <tr>
+        <th>Uhr</th>
+        <td><?php echo $this->dateFormat(
+                $event['time'], IntlDateFormatter::NONE,
+                IntlDateFormatter::SHORT
+            ); ?></td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td><?php echo $event['status']; ?></td>
+    </tr>
+    </tbody>
+</table>
+
+<hr>
+<p>
+    <a class="btn btn-default" href="<?php echo $this->url('event-admin'); ?>">
+        Liste
+    </a>
+</p>

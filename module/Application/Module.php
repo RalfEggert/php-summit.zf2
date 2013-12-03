@@ -45,6 +45,8 @@ class Module implements
         $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+        $e->getApplication()->getServiceManager()->get('SessionConfig');
     }
 
     /**

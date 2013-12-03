@@ -1,0 +1,40 @@
+<h1>Eventliste</h1>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Beschreibung</th>
+        <th>Datum</th>
+        <th>Zeit</th>
+        <th>Status</th>
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($this->eventList as $event): ?>
+        <tr>
+            <td><?php echo $event['id']; ?></td>
+            <td><?php echo $event['name']; ?></td>
+            <td><?php echo $event['description']; ?></td>
+            <td><?php echo $this->dateFormat(
+                    $event['date'], IntlDateFormatter::LONG,
+                    IntlDateFormatter::NONE
+                ); ?></td>
+            <td><?php echo $this->dateFormat(
+                    $event['time'], IntlDateFormatter::NONE,
+                    IntlDateFormatter::SHORT
+                ); ?></td>
+            <td><?php echo $event['status']; ?></td>
+            <td>
+                <a href="<?php echo $this->url(
+                    'event-admin/action', array('action' => 'show', 'id' => $event['id'])
+                ) ?>" class="btn btn-default">
+                    anzeigen
+                </a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

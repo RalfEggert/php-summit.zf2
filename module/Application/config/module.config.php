@@ -47,4 +47,24 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+
+    'service_manager' => array(
+        'factories' => array(
+            'SessionConfig' => 'Zend\Session\Service\SessionConfigFactory',
+            'mainmenu' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+        ),
+    ),
+
+    'session_config' => array(
+        'name' => 'ZFPHPSUMMIT',
+    ),
+
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' => 'Home',
+                'route' => 'home',
+            ),
+        ),
+    ),
 );

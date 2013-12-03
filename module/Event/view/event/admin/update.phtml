@@ -1,0 +1,43 @@
+<?php
+use Event\Entity\EventEntity;
+use Event\Form\EventForm;
+use Zend\Form\Element\Csrf;
+
+/* @var $event EventEntity */
+$event = $this->event;
+
+/* @var $eventForm EventForm */
+$eventForm = $this->eventForm;
+$eventForm->prepare();
+$eventForm->setAttribute(
+    'action', $this->url(
+        'event-admin/action',
+        array('action' => 'update', 'id' => $event->getId())
+    )
+);
+
+foreach ($eventForm as $element) {
+    if ($element instanceof Csrf) {
+        continue;
+    }
+    $element->setLabelAttributes(
+        array('style' => 'display: block; width: 200px;')
+    );
+    $element->setAttributes(
+        array('style' => 'display: block; width: 400px;')
+    );
+}
+?>
+<h1>Event bearbeiten</h1>
+
+<?php if ($this->message): ?>
+    <div class="alert alert-danger"><?php echo $this->message; ?></div>
+<?php endif; ?>
+<?php echo $this->form($eventForm); ?>
+
+<hr>
+<p>
+    <a class="btn btn-default" href="<?php echo $this->url('event-admin'); ?>">
+        Liste
+    </a>
+</p>

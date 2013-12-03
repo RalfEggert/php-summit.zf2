@@ -179,7 +179,7 @@ class EventService
 
         $this->getFilter()->setData($data);
 
-        if ($this->getFilter()->isValid()) {
+        if (!$this->getFilter()->isValid()) {
             $this->setMessage('Eingaben prüfen!');
 
             return false;

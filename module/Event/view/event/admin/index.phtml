@@ -14,7 +14,15 @@ use Event\Entity\EventEntity;
         <th>Datum</th>
         <th>Zeit</th>
         <th>Status</th>
-        <th>&nbsp;</th>
+        <th>
+            <a href="<?php echo $this->url(
+                'event-admin/action',
+                array('action' => 'create')
+            ) ?>" class="btn btn-default">
+                anlegen
+            </a>
+
+        </th>
     </tr>
     </thead>
     <tbody>
@@ -38,6 +46,18 @@ use Event\Entity\EventEntity;
                     array('action' => 'show', 'id' => $event->getId())
                 ) ?>" class="btn btn-default">
                     anzeigen
+                </a>
+                <a href="<?php echo $this->url(
+                    'event-admin/action',
+                    array('action' => 'update', 'id' => $event->getId())
+                ) ?>" class="btn btn-default">
+                    bearbeiten
+                </a>
+                <a href="<?php echo $this->url(
+                    'event-admin/action',
+                    array('action' => 'delete', 'id' => $event->getId())
+                ) ?>" class="btn btn-default">
+                    löschen
                 </a>
             </td>
         </tr>

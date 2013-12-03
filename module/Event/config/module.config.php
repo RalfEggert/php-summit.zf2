@@ -65,6 +65,11 @@ return array(
             'Event\Filter' => 'Event\InputFilter\EventFilterFactory',
         ),
     ),
+    'form_elements'       => array(
+        'factories' => array(
+            'Event\Form' => 'Event\Form\EventFormFactory',
+        ),
+    ),
     'navigation'      => array(
         'default' => array(
             array(
@@ -75,6 +80,18 @@ return array(
                         'label'   => 'Event anzeigen',
                         'route'   => 'event-admin/action',
                         'action'  => 'show',
+                        'visible' => false,
+                    ),
+                    array(
+                        'label'   => 'Event anlegen',
+                        'route'   => 'event-admin/action',
+                        'action'  => 'create',
+                        'visible' => false,
+                    ),
+                    array(
+                        'label'   => 'Event bearbeiten',
+                        'route'   => 'event-admin/action',
+                        'action'  => 'update',
                         'visible' => false,
                     ),
                 ),

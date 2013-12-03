@@ -14,6 +14,7 @@
  */
 namespace Application;
 
+use Application\Listener\I18nListener;
 use Zend\EventManager\EventInterface;
 use Zend\Filter\StaticFilter;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
@@ -47,6 +48,8 @@ class Module implements
         $moduleRouteListener->attach($eventManager);
 
         $e->getApplication()->getServiceManager()->get('SessionConfig');
+
+        $eventManager->attachAggregate(new I18nListener());
     }
 
     /**
